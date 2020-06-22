@@ -1,0 +1,5 @@
+editdistance
+numpy
+opencv-python
+tensorboard
+tensorflow
