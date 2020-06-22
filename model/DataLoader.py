@@ -34,9 +34,10 @@ class DataLoader:
          for line in f:
                 if not line or line[0]=='#':
                     continue
-                lineSplit= line.strip().strip(' ')
+                lineSplit = line.strip().split(' ')
                 assert len(lineSplit) >= 9
                 fileNameSplit = lineSplit[0].split('-')
+               
                 fileName = filePath + 'words/' + fileNameSplit[0] + '/' + fileNameSplit[0] + '-' + fileNameSplit[1] + '/' + lineSplit[0] + '.png'
                 gtText = self.truncateLabel(' '.join(lineSplit[8:]), maxTextLen)
                 chars= chars.union(set(list(gtText)))
