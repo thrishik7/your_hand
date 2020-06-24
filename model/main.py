@@ -38,7 +38,10 @@ def main():
         elif args.validate:
                 model = Model(loader.charList, decoderType, mustRestore=True)
                 validate(model, loader)
-
+    else:
+        print(open(FilePaths.fnAccuracy).read())
+        model = Model(open(FilePaths.fnCharList).read(), decoderType, mustRestore=True)
+        infer(model, FilePaths.fnInfer)
 def train(model,loader):        
         epoch =0
         bestCharErrorRate = float('inf')
