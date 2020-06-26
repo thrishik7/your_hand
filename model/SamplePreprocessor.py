@@ -6,10 +6,13 @@ import cv2
 from detectword import wordSegmentation
 
 
-def preprocess(img, imgSize, dataAugmentation=False):
+def preprocess(img, imgSize, dataAugmentation=False, train=True):
     
-    images =wordSegmentation(img)
-    
+    if train == False:
+     images =wordSegmentation(img)
+    else:
+      images=[]
+      images.append(img)
     res=[]
     for img in images:
     
@@ -42,5 +45,7 @@ def preprocess(img, imgSize, dataAugmentation=False):
             img = img / s if s>0 else img
             res.append(img)
     
-
-    return res
+    if train==False:
+     return res
+    else:
+     return res[0]
