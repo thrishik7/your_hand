@@ -105,10 +105,12 @@ def validate(model, loader):
 
 
 def infer(model, fnImg):
-    img= preprocess(cv2.imread(fnImg, cv2.IMREAD_GRAYSCALE), Model.imgSize)
-    batch = Batch(None, [img])
-    recognized= model.inferBatch(batch, True)
-    print('Recognized:','"'+recognized[0]+'"')
+    imgs= preprocess(cv2.imread(fnImg, cv2.IMREAD_GRAYSCALE), Model.imgSize)
+    print('Recognized: ')
+    for img in imgs :
+        batch = Batch(None, [img])
+        recognized= model.inferBatch(batch, True)
+        print('"'+recognized[0]+'"')
 
 
 if __name__ =='__main__':

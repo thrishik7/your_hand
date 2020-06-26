@@ -56,6 +56,7 @@ class Model:
                     pool= tf.nn.max_pool(relu,(1, poolVals[i][0], poolVals[i][1], 1), (1, strideVals[i][0], strideVals[i][1], 1), 'VALID')
 
             self.cnnOut4d= pool    
+            print(pool)
 
         def setupRNN(self):
 
@@ -177,3 +178,6 @@ class Model:
                     encodedLabelStrs[batchElement].append(label)
             
             return [str().join([self.charList[c] for c in labelStr]) for labelStr in encodedLabelStrs]
+
+
+
