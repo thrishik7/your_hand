@@ -18,7 +18,6 @@ class YourHands extends React.Component{
             <NavBar 
             text="Yourhands"
             fontSize='1.5em'
-            backgroundColor={uiTheme.palette.primary.main}
             color='primary'
             >
             </NavBar>
