@@ -3,6 +3,8 @@ import UploadPic from '../Uploadpic/UploadPic';
 import Convert from '../convert/Convert';
 import Display from '../display/Display';
 import axios from 'axios';
+
+
 class AddPic extends React.Component {
     constructor(props) {
         super(props);

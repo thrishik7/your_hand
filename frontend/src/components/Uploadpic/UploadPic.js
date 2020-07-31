@@ -1,56 +1,62 @@
-import React from 'react';
-import {useDropzone} from 'react-dropzone';
+import React, {Component} from 'react';
+import Dropzone from 'react-dropzone';
+import { withStyles } from '@material-ui/styles';
+import theme from '../../app/ui-theme';
 
-import styled from 'styled-components';
+const styles = theme => ({
 
-const getColor = (props) => {
-  if (props.isDragAccept) {
-      return '#00e676';
+    container:{
+    'flex': 1,
+    'display': 'flex',
+    'flex-direction': 'column',
+    'align-items': 'center',
+    'padding': '20px',
+    'border-width': '2px',
+    'border-radius': '2px',
+    'border-color': '#000000',
+    'border-style': 'dashed',
+    'background-color': '#fafafa',
+    'color': '#000000',
+    'outline': 'none',
+    'font-family':'Impact, Charcoal, sans-serif',
+    'transition': 'border .24s ease-in-out'},
+});
+
+
+class UploadPic extends Component {
+  constructor() {
+    super();
+    this.onDrop = (files) => {
+      this.setState({files})
+    };
+    this.state = {
+      files: []
+    };
   }
-  if (props.isDragReject) {
-      return '#ff1744';
+
+   
+    render() {
+    const files = this.state.files.map(file => (
+      <li key={file.name}>
+        {file.name} - {file.size} bytes
+      </li>
+    ));
+    const { classes } = this.props;
+    return (
+      <Dropzone accept="image/png" onDrop={this.onDrop}>
+        {({getRootProps, getInputProps}) => (
+          <section className={classes.container} >
+            <div {...getRootProps({className: 'dropzone'})}>
+              <input {...getInputProps()} />
+              <p>Drag and drop images here, or click to select image (.png) +</p>
+            </div>
+          </section>
+        )}
+      </Dropzone>
+    );
   }
-  if (props.isDragActive) {
-      return '#2196f3';
-  }
-  return '#eeeeee';
 }
 
-const Container = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  border-width: 2px;
-  border-radius: 2px;
-  border-color: ${props => getColor(props)};
-  border-style: dashed;
-  background-color: #fafafa;
-  color: #bdbdbd;
-  outline: none;
-  transition: border .24s ease-in-out;
-`;
- 
-function UploadPic(props) {
-
-  const {
-    getRootProps,
-    getInputProps,
-    isDragActive,
-    isDragAccept,
-    isDragReject
-  } = useDropzone({accept: 'image/*'});
-
-  return (
-    <div className="container">
-    <Container {...getRootProps({isDragActive, isDragAccept, isDragReject})}>
-      <input {...getInputProps()} />
-      <p>Drag and drop image here, or click to select files +</p>
-    </Container>
-  </div>
-  );
-}
 
 
-export default UploadPic;
+export default withStyles(styles)(UploadPic);
