@@ -12,9 +12,6 @@ const NavBar =(props) =>{
         <div>
           <AppBar position="static">
            <Toolbar>
-           <IconButton edge="start" className="menubutton" color="inherit" aria-label="menu">
-           <MenuIcon />
-           </IconButton>
              <Typography variant="h6" className="Your_hands">
                Your Hands
              </Typography>

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Dropzone from 'react-dropzone';
 import { withStyles } from '@material-ui/styles';
 import theme from '../../app/ui-theme';
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
 
@@ -20,6 +21,10 @@ const styles = theme => ({
     'outline': 'none',
     'font-family':'Impact, Charcoal, sans-serif',
     'transition': 'border .24s ease-in-out'},
+    proceed:{
+        'align':'center',
+        'margin':'20px'
+    }
 });
 
 
@@ -46,20 +51,25 @@ class UploadPic extends Component {
     ));
     const { classes } = this.props;
     return (
-        <Dropzone accept="image/png" onDrop={this.onDrop}>
+     <div>
+     <Dropzone accept="image/png" onDrop={this.onDrop}>
         {({getRootProps, getInputProps}) => (
           <section className={classes.container}>
             <div {...getRootProps({className: 'dropzone'})}>
               <input {...getInputProps()} />
-              <p>Drag 'n' drop some files here, or click to select files</p>
+              <p>Drag 'n' drop some files here, or click to select files (.png)</p>
             </div>
             <aside>
-              <h4>Files</h4>
+              <h4>File Selected:</h4>
               <ul>{files}</ul>
             </aside>
           </section>
         )}
       </Dropzone>
+      <br/>
+    <Button className={classes.proceed} variant="contained" color="primary">
+               proceed
+     </Button></div>
     );
   }
 }
