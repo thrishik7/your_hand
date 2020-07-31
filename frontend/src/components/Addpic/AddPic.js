@@ -38,7 +38,7 @@ class AddPic extends React.Component {
         const {step}= this.state;
         const {selectedFile} = this.state;
         switch(step){
-         case 1: return (<UploadPic
+         case 3: return (<UploadPic
                           nextStep={this.nextStep}
                           handleChange={this.handleChange}
                           selectedfile={selectedFile}
@@ -48,7 +48,7 @@ class AddPic extends React.Component {
                         handleChange={this.handleChange}
                         selectedfile={selectedFile}
            />);   
-         case 3: return (<Convert
+         case 1: return (<Convert
                          nextStep={this.nextStep}
                          handleChange={this.handleChange}
                          selectedfile={selectedFile}

@@ -27,29 +27,36 @@ class UploadPic extends Component {
   constructor() {
     super();
     this.onDrop = (files) => {
-      this.setState({files})
+        this.setState({files})
+        console.log(this.state.files);
+     
     };
     this.state = {
       files: []
     };
+   
   }
 
-   
+
     render() {
     const files = this.state.files.map(file => (
-      <li key={file.name}>
+        <li key={file.name}>
         {file.name} - {file.size} bytes
       </li>
     ));
     const { classes } = this.props;
     return (
-      <Dropzone accept="image/png" onDrop={this.onDrop}>
+        <Dropzone accept="image/png" onDrop={this.onDrop}>
         {({getRootProps, getInputProps}) => (
-          <section className={classes.container} >
+          <section className={classes.container}>
             <div {...getRootProps({className: 'dropzone'})}>
               <input {...getInputProps()} />
-              <p>Drag and drop images here, or click to select image (.png) +</p>
+              <p>Drag 'n' drop some files here, or click to select files</p>
             </div>
+            <aside>
+              <h4>Files</h4>
+              <ul>{files}</ul>
+            </aside>
           </section>
         )}
       </Dropzone>
