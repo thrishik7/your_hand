@@ -8,7 +8,6 @@ class YourHands extends React.Component{
 
         return(           
            <div className="App">
-             
               <NavBar />
               <AddPic />
             </div>

@@ -11,7 +11,9 @@
     "react-dom": "^16.13.1",
     "react-dropzone": "^11.0.2",
     "react-expanding-textarea": "^2.2.0",
+    "react-redux": "^7.2.1",
     "react-scripts": "0.9.5",
+    "redux": "^4.0.5",
     "styled-components": "^5.1.1"
   },
   "devDependencies": {},

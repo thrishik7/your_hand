@@ -30,17 +30,29 @@ const styles= theme => ({
 class Convert extends React.Component {
 constructor(props) {
     super(props);
-    this.state = { };
+    this.state = { 
+        selectedHw:""
+    };
  }
 
     back_edit = e => {
     e.preventDefault();
-    this.props.prevStep();
+    this.props.prevStep(this.props.text);
     };
-
+    
+    handleChange =(e)=>{
+        this.setState({
+            selectedHw:e.target.vaue
+        })
+        console.log(this.props.text)
+    }
     render() {
         const { classes } = this.props;
-        const { values, handleChange } = this.props;
+        const { values} = this.props;
+        const handwritings= ['handwriting1','handwriting2','handwriting3'];
+        var hw= handwritings.reduce(function(memo,hw1, index) {
+            <option value={index+1}>{hw1}</option>
+          }, {});
         return (
         <div>
         <FormControl variant="outlined" className={classes.formControl}>
@@ -49,19 +61,24 @@ constructor(props) {
           <Select
           native
           label="Handwriting"
+          onChange={this.handleChange}
           inputProps={{
             name: 'handwriting',
             id: 'outlined-age-native-simple',
           }}
         >
           <option aria-label="None" value="" />
-          <option value={10}>handwriting1</option>
-          <option value={20}>handwriting2</option>
-          <option value={30}>handwriting3</option>
+          <option value={10}>hw1</option>
+          <option value={20}>hw2</option>
+          <option value={30}>hw3</option>
         </Select>
       </FormControl>
       <Button variant="contained" className={classes.add} color="primary">+</Button>
-      <Button className={classes.proceed} variant="contained" color="secondary">
+      <Button 
+       className={classes.proceed}
+       variant="contained"
+       disabled={this.state.selectedHw==""}
+       color="secondary">
                Convert
      </Button>
       <Button

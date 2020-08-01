@@ -12,21 +12,31 @@ class AddPic extends React.Component {
     
         this.state = {
             step: 1,
-            selectedFile: null
+            selectedFile: null,
+            fileStatus:0,
+            text:""
         };
     }
+
+      fileupload=()=>{
+          this.setState({
+            fileStatus:1
+          });
+      }
       // Proceed to next step
-      nextStep =() =>{
+      nextStep =(txt) =>{
           const {step} = this.state;
           this.setState({
-             step:step+1
+             step:step+1,
+             text:txt
           });
       }
       //Go back 
-      prevStep =() =>{
+      prevStep =(txt) =>{
         const {step} = this.state;
         this.setState({
-           step:step-1
+           step:step-1,
+           text:txt
         });
     }
      // Handle field change 
@@ -37,7 +47,7 @@ class AddPic extends React.Component {
      render() {
             
         const {step}= this.state;
-        const {selectedFile} = this.state;
+        const {selectedFile, fileStatus} = this.state;
         switch(step){
          case 1: return (
                        <Grid container>
@@ -46,13 +56,16 @@ class AddPic extends React.Component {
                           nextStep={this.nextStep}
                           handleChange={this.handleChange}
                           selectedfile={selectedFile}
+
                          />
                          </Grid>
                          <Grid item sm>
                          <Display
                          nextStep={this.nextStep}
+                         fileStatus={fileStatus}
                          handleChange={this.handleChange}
                          selectedfile={selectedFile}
+                         text={this.state.text}
                          />
                          </Grid>
                         </Grid>
@@ -72,6 +85,7 @@ class AddPic extends React.Component {
              prevStep={this.prevStep}
              handleChange={this.handleChange}
              selectedfile={selectedFile}
+             text={this.state.text}
              />
              </Grid>
             </Grid>

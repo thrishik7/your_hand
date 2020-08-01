@@ -38,34 +38,43 @@ constructor(props) {
     super(props);
 
     this.state = {
+        text: this.props.text
     };
 } 
 add_hand = e => {
     e.preventDefault();
-    this.props.nextStep();
+    this.props.nextStep(this.state.text);
   };
+ 
+  handleChange = (e)=>{
+    this.setState({
+      text:e.target.value
+    })
+}
 
 
     render() {
         const { classes } = this.props;
-        const { values, handleChange } = this.props;
-        const text= "If you pass a rows prop, then this sdjowe kesdnxoed eowisnolwen ewiodknxlwe edikolen  kejdnlwe ewkdjnwk wekjndjk ewmnfnocinklq jkfrjbkj enjkdcjk,sf lqnklwrn rflfn ckjowql lskdnl rownflw lkdknflw ntlnlrnscaln component will perform a calculation based on computed lineHeight, borderTopWidth, borderBottomWidth, paddingTop and paddingBottom to deduce what the minimum height-in-rows the component should be.";
+        const { values} = this.props;
         return  ( <div className={classes.Display}>
                  <label className={classes.Label} for="text">
                   Edit the text 
                   </label>
                   <Textarea 
                    className={classes.textArea}
-                   defaultValue={text}
+                   defaultValue={this.state.text}
                    id= "text"
                    maxLength="3000"
                    name="pet[notes]"
-                   placeholder="add the image to convert it to text..."
+                   onChange={this.handleChange}
+                   placeholder="add the image in the left or text here ..."
+                   value={this.state.text}
                    />
                   <Button
                   className={classes.proceed}
                   variant="contained"
                   onClick={this.add_hand}
+                  disabled={this.state.text.length<1}
                   color="primary">
                   Select handwriting
                   </Button>

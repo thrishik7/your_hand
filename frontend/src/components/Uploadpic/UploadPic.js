@@ -69,7 +69,11 @@ class UploadPic extends Component {
         )}
       </Dropzone>
       <br/>
-    <Button className={classes.proceed} variant="contained" color="primary">
+    <Button 
+    className={classes.proceed} 
+    variant="contained"
+    disabled={this.state.files.length<1}
+    color="primary">
                proceed
      </Button></div>
     );
