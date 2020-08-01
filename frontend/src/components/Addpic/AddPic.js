@@ -58,12 +58,24 @@ class AddPic extends React.Component {
                         </Grid>
                          );
   
-         case 2: return (<Convert
-                         nextStep={this.nextStep}
-                         handleChange={this.handleChange}
-                         selectedfile={selectedFile}
-           />);
-        }
+         case 2: return (
+            <Grid container>
+            <Grid item sm>
+           <UploadPic
+              nextStep={this.nextStep}
+              handleChange={this.handleChange}
+              selectedfile={selectedFile}
+             />
+             </Grid>
+             <Grid item sm>
+             <Convert
+             prevStep={this.prevStep}
+             handleChange={this.handleChange}
+             selectedfile={selectedFile}
+             />
+             </Grid>
+            </Grid>
+         );}
         }
 }
 

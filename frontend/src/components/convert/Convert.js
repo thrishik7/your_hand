@@ -30,17 +30,23 @@ const styles= theme => ({
 class Convert extends React.Component {
 constructor(props) {
     super(props);
- this.state = {
+    this.state = { };
+ }
+
+    back_edit = e => {
+    e.preventDefault();
+    this.props.prevStep();
     };
-}
 
     render() {
         const { classes } = this.props;
-   
-        return (<div>
-    <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel htmlFor="outlined-age-native-simple">Handwriting</InputLabel>
-        <Select
+        const { values, handleChange } = this.props;
+        return (
+        <div>
+        <FormControl variant="outlined" className={classes.formControl}>
+       <InputLabel htmlFor="outlined-age-native-simple">Handwriting</InputLabel>
+          
+          <Select
           native
           label="Handwriting"
           inputProps={{
@@ -58,7 +64,13 @@ constructor(props) {
       <Button className={classes.proceed} variant="contained" color="secondary">
                Convert
      </Button>
-        
+      <Button
+                  className={classes.proceed}
+                  variant="contained"
+                  onClick={this.back_edit}
+                  color="primary">
+                  back
+      </Button>
         </div>);
     }
 }

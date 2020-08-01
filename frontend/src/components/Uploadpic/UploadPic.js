@@ -25,7 +25,7 @@ const styles = theme => ({
     'transition': 'border .24s ease-in-out'},
     proceed:{
         'align':'center',
-        'margin':'20px'
+        'margin':'4px'
     }
 });
 
