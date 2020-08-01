@@ -3,6 +3,7 @@ import UploadPic from '../Uploadpic/UploadPic';
 import Convert from '../convert/Convert';
 import Display from '../display/Display';
 import axios from 'axios';
+import Grid from '@material-ui/core/Grid';
 
 
 class AddPic extends React.Component {
@@ -39,13 +40,22 @@ class AddPic extends React.Component {
         const {selectedFile} = this.state;
         switch(step){
          case 1: return (
-                       
+                       <Grid container>
+                        <Grid item sm>
                        <UploadPic
                           nextStep={this.nextStep}
                           handleChange={this.handleChange}
                           selectedfile={selectedFile}
                          />
-                        
+                         </Grid>
+                         <Grid item sm>
+                         <Display
+                         nextStep={this.nextStep}
+                         handleChange={this.handleChange}
+                         selectedfile={selectedFile}
+                         />
+                         </Grid>
+                        </Grid>
                          );
   
          case 2: return (<Convert

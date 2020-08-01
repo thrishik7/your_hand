@@ -5,7 +5,9 @@ import theme from '../../app/ui-theme';
 import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
-
+    leftconsole:{
+        'margin': '10px'
+    },
     container:{
     'flex': 1,
     'display': 'flex',
@@ -51,7 +53,7 @@ class UploadPic extends Component {
     ));
     const { classes } = this.props;
     return (
-     <div>
+     <div className={classes.leftconsole}>
      <Dropzone accept="image/png" onDrop={this.onDrop}>
         {({getRootProps, getInputProps}) => (
           <section className={classes.container}>

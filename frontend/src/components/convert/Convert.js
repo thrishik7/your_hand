@@ -17,9 +17,14 @@ const styles= theme => ({
     },
     add:{
         'align':'center',
+        'margin':'7px',
+        'height':'53px'
+    },
+    proceed:{
+        'align':'center',
         'margin':'10px',
         'height':'53px'
-    }
+     }
   });
 
 class Convert extends React.Component {
@@ -50,6 +55,10 @@ constructor(props) {
         </Select>
       </FormControl>
       <Button variant="contained" className={classes.add} color="primary">+</Button>
+      <Button className={classes.proceed} variant="contained" color="secondary">
+               Convert
+     </Button>
+        
         </div>);
     }
 }
