@@ -43,13 +43,16 @@ class UploadPic extends Component {
     super(props);
     this.onDrop = () => {
        this.setState({files: event.target.files[0]});
+       
       };
     this.state = {
       files: null
     };
+ 
     }
     
-    onFileUpload =() => {
+ 
+    onFileUpload = async() => {
       
        const formData = new FormData();
        console.log(this.state.files);
@@ -58,12 +61,19 @@ class UploadPic extends Component {
          this.state.files,
          this.state.files.name
         );
+       try{
        
-       axios.post("http://localhost:5000/upload-image", formData).then(resp =>{
-          this.props.getText(resp.data["text"]);
-       }); 
-      }
+       await axios.post("http://localhost:5000/upload-image", formData).then(resp=>{
+        console.log(resp);
+       this.props.getText(resp.data); 
+       });
 
+        }
+        catch(err){
+         console.error(err);
+       }
+      }
+    
     render() {
     let filet="";
     if(this.state.files!=null)

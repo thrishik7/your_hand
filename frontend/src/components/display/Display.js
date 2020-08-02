@@ -36,26 +36,32 @@ proceed:{
 class Display extends React.Component {
 constructor(props) {
     super(props);
-
-    this.state = {
-        text: this.props.text
-    };
+    this.state={};
+    this.state.text=props.text;
+    
 } 
-add_hand = e => {
+
+   add_hand = e => {
     e.preventDefault();
     this.props.nextStep(this.state.text);
-  };
+    };
  
   handleChange = (e)=>{
     this.setState({
       text:e.target.value
     })
-}
+    } 
+   changeText =(txt) =>{
+    this.setState({
+           text:txt
+       });
+   }
 
 
     render() {
         const { classes } = this.props;
-        const { values} = this.props;
+        const {text} = this.state;
+         
         return  ( <div className={classes.Display}>
                  <label className={classes.Label} for="text">
                   Edit the text 
@@ -68,7 +74,7 @@ add_hand = e => {
                    name="pet[notes]"
                    onChange={this.handleChange}
                    placeholder="Add an image in the left or text here ..."
-                   value={this.state.text}
+                   value={text}
                    />
                   <Button
                   className={classes.proceed}

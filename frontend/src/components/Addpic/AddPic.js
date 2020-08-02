@@ -9,7 +9,7 @@ import Grid from '@material-ui/core/Grid';
 class AddPic extends React.Component {
     constructor(props) {
         super(props);
-    
+        this.displayElement = React.createRef();
         this.state = {
             step: 1,
             selectedFile: null,
@@ -38,11 +38,17 @@ class AddPic extends React.Component {
            step:step-1,
            text:txt
         });}
+      
       getText=(txt)=>{
+          const {step} = this.state; 
+          console.log("vandhuruchu");
+          
           this.setState({
+              step:step,
               text:txt
-          })
-      };
+          });
+           this.displayElement.current.changeText(txt);
+        }
     
      // Handle field change 
      handleChange = input =>e=>{
@@ -64,8 +70,11 @@ class AddPic extends React.Component {
                           getText={this.getText}
                          />
                          </Grid>
+                         
                          <Grid item sm>
                          <Display
+                         ref={this.displayElement}
+                         text={this.state.text}
                          nextStep={this.nextStep}
                          fileStatus={fileStatus}
                          handleChange={this.handleChange}
