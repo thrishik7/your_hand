@@ -3,6 +3,7 @@ import Dropzone from 'react-dropzone';
 import { withStyles } from '@material-ui/styles';
 import theme from '../../app/ui-theme';
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
 
 const styles = theme => ({
     leftconsole:{
@@ -26,34 +27,54 @@ const styles = theme => ({
     proceed:{
         'align':'center',
         'margin':'4px'
-    }
+    },
+    Label:{
+      'display': 'block',
+      'margin': '10px',
+      'font-family':'Impact, Charcoal, sans-serif',
+      'font-weight': 'bold',
+      'font-size':"20px"
+   }, 
 });
 
 
 class UploadPic extends Component {
-  constructor() {
-    super();
-    this.onDrop = (files) => {
-        this.setState({files})
-        console.log(this.state.files);
-     
-    };
+  constructor(props) {
+    super(props);
+    this.onDrop = () => {
+       this.setState({files: event.target.files[0]});
+      };
     this.state = {
-      files: []
+      files: null
     };
-   
-  }
-
+    }
+    
+    onFileUpload =() => {
+      
+       const formData = new FormData();
+       console.log(this.state.files);
+       formData.append(
+         "image",
+         this.state.files,
+         this.state.files.name
+        );
+       
+       axios.post("http://localhost:5000/upload-image", formData).then(resp =>{
+          this.props.getText(resp.data["text"]);
+       }); 
+      }
 
     render() {
-    const files = this.state.files.map(file => (
-        <li key={file.name}>
-        {file.name} - {file.size} bytes
-      </li>
-    ));
+    let filet="";
+    if(this.state.files!=null)
+      filet = this.state.files.name;
+  
     const { classes } = this.props;
     return (
      <div className={classes.leftconsole}>
+     <label className={classes.Label}>
+                  Select an image
+                  </label>
      <Dropzone accept="image/png" onDrop={this.onDrop}>
         {({getRootProps, getInputProps}) => (
           <section className={classes.container}>
@@ -63,7 +84,7 @@ class UploadPic extends Component {
             </div>
             <aside>
               <h4>File Selected:</h4>
-              <ul>{files}</ul>
+              {filet}
             </aside>
           </section>
         )}
@@ -72,7 +93,8 @@ class UploadPic extends Component {
     <Button 
     className={classes.proceed} 
     variant="contained"
-    disabled={this.state.files.length<1}
+    onClick= {this.onFileUpload}
+    disabled={filet==""}
     color="primary">
                proceed
      </Button></div>

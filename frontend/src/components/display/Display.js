@@ -67,7 +67,7 @@ add_hand = e => {
                    maxLength="3000"
                    name="pet[notes]"
                    onChange={this.handleChange}
-                   placeholder="add the image in the left or text here ..."
+                   placeholder="Add an image in the left or text here ..."
                    value={this.state.text}
                    />
                   <Button

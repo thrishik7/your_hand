@@ -1,10 +1,22 @@
-from multiprocessing import Process
-import socket 
+from flask import Flask, request, redirect, send_from_directory
+from flask_cors import CORS
+import os
+
+app = Flask(__name__, static_folder='frontend/build/')
+
+CORS(app, resources={r"*":{"origins":"http://localhost:5000"}})
+
+app.config["IMAGE_UPLOADS"]='../data'
+
+@app.route("/upload-image", methods=["POST"])
+def upload_image():
+    if request.method =="POST":
+       if request.files:
+           image= request.files["image"]
+           image.save(os.path.join(app.config["IMAGE_UPLOADS"], 'test.png'))
 
 
-server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_socket.bind(socket.gethostname(), 1024)
-server_socket.listen(5)
 
-while True:
-    clt, adr = server_socket.accept()
+
+if __name__ == '__main__':
+    app.run(use_reloader=True, port=5000, threaded=True)

@@ -31,14 +31,19 @@ class AddPic extends React.Component {
              text:txt
           });
       }
-      //Go back 
+      
       prevStep =(txt) =>{
         const {step} = this.state;
         this.setState({
            step:step-1,
            text:txt
-        });
-    }
+        });}
+      getText=(txt)=>{
+          this.setState({
+              text:txt
+          })
+      };
+    
      // Handle field change 
      handleChange = input =>e=>{
          this.setState({[input]: e.target.value});
@@ -56,7 +61,7 @@ class AddPic extends React.Component {
                           nextStep={this.nextStep}
                           handleChange={this.handleChange}
                           selectedfile={selectedFile}
-
+                          getText={this.getText}
                          />
                          </Grid>
                          <Grid item sm>
@@ -78,7 +83,8 @@ class AddPic extends React.Component {
               nextStep={this.nextStep}
               handleChange={this.handleChange}
               selectedfile={selectedFile}
-             />
+              getText={this.getText}
+            />
              </Grid>
              <Grid item sm>
              <Convert
