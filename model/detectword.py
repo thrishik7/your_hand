@@ -15,7 +15,7 @@ import tensorflow as tf
 import matplotlib.pyplot as plt
 
 
-def wordSegmentation(img, kernelSize= 801, sigma=11, theta= 7, minArea=100):
+def wordSegmentation(img, kernelSize=25, sigma=11, theta=7, minArea=0):
     
     kernel = createKernel(kernelSize, sigma, theta)
     imgFiltered = cv2.filter2D(img, -1, kernel, borderType=cv2.BORDER_REPLICATE).astype(np.uint8)
